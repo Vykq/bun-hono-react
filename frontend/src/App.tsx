@@ -7,7 +7,12 @@ function App() {
 
 
   useEffect(() =>{
-    fetch("/api/checkpoints/total")
+    async function fetchTotal(){
+      const res = await fetch("/api/checkpoints/total");
+      const data = await res.json();
+      setTotalCheckpoints(data.total);
+    }
+    fetchTotal();
   }, [])
 
   return (
