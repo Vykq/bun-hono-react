@@ -44,6 +44,7 @@ export const checkpointsRoute = new Hono()
         return c.json(checkpoint);
     })
     .get('/total', async (c) => {
+        await new Promise((r) => setTimeout(r, 2000));
         const total = fakeCheckpoints.length;
         return c.json({"total" : total});
     })

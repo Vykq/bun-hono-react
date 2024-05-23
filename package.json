@@ -7,6 +7,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.7",
     "@types/bun": "latest"
   },
   "peerDependencies": {
