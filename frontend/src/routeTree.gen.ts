@@ -12,8 +12,9 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as CreateCheckpointImport } from './routes/create-checkpoint'
-import { Route as CheckpointsImport } from './routes/checkpoints'
-import { Route as IndexImport } from './routes/index'
+import { Route as IndexImport } from './rout./routes/checkpoints.index
+import { Route as CheckpointsIndexImport } from './routes/checkpoints.index'
+import { Route as CheckpointsCheckpointIdImport } from './routes/checkpoints.$checkpointId'
 
 // Create/Update Routes
 
@@ -22,13 +23,18 @@ const CreateCheckpointRoute = CreateCheckpointImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const CheckpointsRoute = CheckpointsImport.update({
-  path: '/checkpoints',
+const IndexRoute = IndexImport.update({
+  path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
-  path: '/',
+const CheckpointsIndexRoute = CheckpointsIndexImport.update({
+  path: '/checkpoints/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CheckpointsCheckpointIdRoute = CheckpointsCheckpointIdImport.update({
+  path: '/checkpoints/$checkpointId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -43,18 +49,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/checkpoints': {
-      id: '/checkpoints'
-      path: '/checkpoints'
-      fullPath: '/checkpoints'
-      preLoaderRoute: typeof CheckpointsImport
-      parentRoute: typeof rootRoute
-    }
     '/create-checkpoint': {
       id: '/create-checkpoint'
       path: '/create-checkpoint'
       fullPath: '/create-checkpoint'
       preLoaderRoute: typeof CreateCheckpointImport
+      parentRoute: typeof rootRoute
+    }
+    '/checkpoints/$checkpointId': {
+      id: '/checkpoints/$checkpointId'
+      path: '/checkpoints/$checkpointId'
+      fullPath: '/checkpoints/$checkpointId'
+      preLoaderRoute: typeof CheckpointsCheckpointIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/checkpoints/': {
+      id: '/checkpoints/'
+      path: '/checkpoints'
+      fullPath: '/checkpoints'
+      preLoaderRoute: typeof CheckpointsIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -64,8 +77,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  CheckpointsRoute,
   CreateCheckpointRoute,
+  CheckpointsCheckpointIdRoute,
+  CheckpointsIndexRoute,
 })
 
 /* prettier-ignore-end */

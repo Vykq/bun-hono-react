@@ -29,12 +29,13 @@ const createPostSchema = checkpointSchema.omit({id: true});
 
 
 const fakeCheckpoints: Checkpoint[] = [ //Fake duombaze
-    { id: 1, title: "Realistic", forPremium: false, forLogged: false, sampler: "DPM++ 2M Karras", real_name: "juggernaut_final", cfg: 8, negative_prompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d)"},
+    { id: 1, title: "Realistic", forPremium: true, forLogged: false, sampler: "DPM++ 2M Karras", real_name: "juggernaut_final", cfg: 8, negative_prompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d)"},
     { id: 2, title: "Anime", forPremium: false, forLogged: false, sampler: "DPM++ 2M Karras", real_name: "anime_model", cfg: 8, negative_prompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d)"}
 ];
 
 export const checkpointsRoute = new Hono()
     .get("/", async (c) => {
+        await new Promise((r) => setTimeout(r, 2000));
         return c.json({checkpoints: fakeCheckpoints});
     })
     .post("/", zValidator("json", createPostSchema), async (c) => {
