@@ -11,17 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as CreateCheckpointImport } from './routes/create-checkpoint'
-import { Route as IndexImport } from './rout./routes/checkpoints.index
+import { Route as IndexImport } from './routes/index'
 import { Route as CheckpointsIndexImport } from './routes/checkpoints.index'
+import { Route as CheckpointsCreateImport } from './routes/checkpoints.create'
 import { Route as CheckpointsCheckpointIdImport } from './routes/checkpoints.$checkpointId'
 
 // Create/Update Routes
-
-const CreateCheckpointRoute = CreateCheckpointImport.update({
-  path: '/create-checkpoint',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -30,6 +25,11 @@ const IndexRoute = IndexImport.update({
 
 const CheckpointsIndexRoute = CheckpointsIndexImport.update({
   path: '/checkpoints/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CheckpointsCreateRoute = CheckpointsCreateImport.update({
+  path: '/checkpoints/create',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -49,18 +49,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/create-checkpoint': {
-      id: '/create-checkpoint'
-      path: '/create-checkpoint'
-      fullPath: '/create-checkpoint'
-      preLoaderRoute: typeof CreateCheckpointImport
-      parentRoute: typeof rootRoute
-    }
     '/checkpoints/$checkpointId': {
       id: '/checkpoints/$checkpointId'
       path: '/checkpoints/$checkpointId'
       fullPath: '/checkpoints/$checkpointId'
       preLoaderRoute: typeof CheckpointsCheckpointIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/checkpoints/create': {
+      id: '/checkpoints/create'
+      path: '/checkpoints/create'
+      fullPath: '/checkpoints/create'
+      preLoaderRoute: typeof CheckpointsCreateImport
       parentRoute: typeof rootRoute
     }
     '/checkpoints/': {
@@ -77,8 +77,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  CreateCheckpointRoute,
   CheckpointsCheckpointIdRoute,
+  CheckpointsCreateRoute,
   CheckpointsIndexRoute,
 })
 

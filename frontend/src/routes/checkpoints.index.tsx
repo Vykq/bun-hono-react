@@ -1,6 +1,4 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-
-import { Button } from "@/components/ui/button"
 import { buttonVariants } from "@/components/ui/button"
 
 import { Skeleton } from "@/components/ui/skeleton"
@@ -66,7 +64,7 @@ function Checkpoints() {
           <h1 className='text-3xl font-bold	'>Total checkpoints</h1>
           <p>Loaded {isPendingTotal? "..." : total.total} checkpoints</p>
         </div>
-        <Link to="/create-checkpoint/" className={buttonVariants({ variant: "" })}>Add new Checkpoint</Link>
+        <Link to="/checkpoints/create" className={buttonVariants({ variant: "" })}>Add new Checkpoint</Link>
       </div>
     </div>
     <div className="all-checkpoints max-w-7xl mx-auto">

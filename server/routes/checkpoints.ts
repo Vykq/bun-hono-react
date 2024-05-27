@@ -5,12 +5,13 @@ import { z } from "zod";
 type Checkpoint = { //Typescript kokios reiksmes turi but
     id: number,
     title: string,
+    image: string,
     forPremium: boolean,
     forLogged: boolean,
     sampler: string,
-    real_name: string,
+    realname: string,
     cfg: number,
-    negative_prompt: string,
+    negativeprompt: string,
 }
 
 
@@ -19,18 +20,19 @@ const checkpointSchema = z.object({
     title: z.string().min(3).max(100),
     forPremium: z.boolean(),
     forLogged: z.boolean(),
+    image: z.string(),
     sampler: z.string().min(3).max(100),
-    real_name: z.string().min(3).max(100),
+    realname: z.string().min(3).max(100),
     cfg: z.number().int().positive(),
-    negative_prompt: z.string()
+    negativeprompt: z.string()
 })
 
 const createPostSchema = checkpointSchema.omit({id: true});
 
 
 const fakeCheckpoints: Checkpoint[] = [ //Fake duombaze
-    { id: 1, title: "Realistic", forPremium: true, forLogged: false, sampler: "DPM++ 2M Karras", real_name: "juggernaut_final", cfg: 8, negative_prompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d)"},
-    { id: 2, title: "Anime", forPremium: false, forLogged: false, sampler: "DPM++ 2M Karras", real_name: "anime_model", cfg: 8, negative_prompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d)"}
+    { id: 1, image: "link", title: "Realistic", forPremium: true, forLogged: false, sampler: "DPM++ 2M Karras", realname: "juggernaut_final", cfg: 8, negativeprompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d)"},
+    { id: 2, image: "link", title: "Anime", forPremium: false, forLogged: false, sampler: "DPM++ 2M Karras", realname: "anime_model", cfg: 8, negativeprompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d)"}
 ];
 
 export const checkpointsRoute = new Hono()
