@@ -93,7 +93,7 @@ function Checkpoints() {
            : checkpoints?.checkpoints.map((checkpoint) => (
               <TableRow key={checkpoint.id}>
                   <TableCell className="font-medium">{checkpoint.title}</TableCell>
-                  <TableCell>{checkpoint.real_name}</TableCell>
+                  <TableCell>{checkpoint.realname}</TableCell>
                   <TableCell>{checkpoint.forPremium? "Yes" : "No"}</TableCell>
                   <TableCell>{checkpoint.forLogged? "Yes" : "No"}</TableCell>
                   <TableCell className='text-right'><Link to={`/checkpoints/${checkpoint.id}`} className={buttonVariants({ variant: "" })}>Edit</Link></TableCell>

@@ -2,12 +2,12 @@ import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { checkpointsRoute } from "./routes/checkpoints";
 import { serveStatic } from "hono/bun";
-
+import { authRoute } from "./routes/auth";
 const app = new Hono()
 
 app.use('*', logger())
 
-const apiRoutes = app.basePath("/api").route("/checkpoints", checkpointsRoute);
+const apiRoutes = app.basePath("/api").route("/checkpoints", checkpointsRoute).route("/", authRoute)
 
 
 app.get('*', serveStatic({ root: './frontend/dist' }))
